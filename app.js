@@ -88,3 +88,57 @@ const instanceA = Singleton.getInstance();
 const instanceB = Singleton.getInstance();
 
 console.log(instanceA === instanceB); // returns true, can never have more than one instance
+
+// FACTORY PATTERN SECTION
+// FACTORY METHOD
+// Way of creating an interface for creating objects
+// Can let subclasses define which classes to instantiate and factory methods are often used in applications to manage, maintain, and manipulate collections of objects that are different but also have a lot of common characteristics
+
+function MemberFactory() {
+  this.createMember = function(name, membershipType) {
+    let member;
+
+    if (membershipType === 'simple') {
+      member = new SimpleMembership(name);
+    } else if (membershipType === 'standard') {
+      member = new StandardMembership(name);
+    } else if (membershipType === 'super') {
+      member = new SuperMembership(name);
+    }
+
+    member.membershipType = membershipType;
+
+    member.define = function() {
+      console.log(`${this.name} (${this.membershipType}): ${this.cost}`);
+    }
+
+    return member;
+  }
+}
+
+const SimpleMembership = function(name) {
+  this.name = name;
+  this.cost = '$5';
+}
+
+const StandardMembership = function(name) {
+  this.name = name;
+  this.cost = '$15';
+}
+
+const SuperMembership = function(name) {
+  this.name = name;
+  this.cost = '$25';
+}
+
+const members = [];
+const factory = new MemberFactory();
+
+members.push(factory.createMember('John Doe', 'simple'));
+members.push(factory.createMember('Mary Fae', 'super'));
+members.push(factory.createMember('Janice Johnson', 'simple'));
+members.push(factory.createMember('Will Thomas', 'standard'));
+
+members.forEach(function(member) {
+  member.define();
+})
