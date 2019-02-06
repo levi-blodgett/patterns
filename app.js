@@ -57,3 +57,34 @@ ItemCtrl.add({id: 1, name: 'John'});
 ItemCtrl.add({id: 2, name: 'Mark'});
 console.log(ItemCtrl.get(1));
 console.log(ItemCtrl.get(2));
+
+// SINGLETON PATTERN SECTION
+// Manifestation of module pattern
+// A singleton object is an immediate anonymous function, can only return one instance of an object at a time
+// Repeated calls to the constructor will just return the same instance
+// Maintains a private reference
+// Used for one use object creation, like one user at once
+// Have a bad rap for a few reasons, but can have their place
+
+const Singleton = (function() {
+  let instance;
+
+  function createInstance() {
+    const object = new Object({name: 'Levi'});
+    return object;
+  }
+
+  return {
+    getInstance: function() {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    }
+  }
+})();
+
+const instanceA = Singleton.getInstance();
+const instanceB = Singleton.getInstance();
+
+console.log(instanceA === instanceB); // returns true, can never have more than one instance
