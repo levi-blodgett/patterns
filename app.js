@@ -11,6 +11,7 @@
   }
 })();
 
+// IIFE, Immediately invoked function expression
 const UICtrl = (function() {
   let text = 'Hello World';
 
