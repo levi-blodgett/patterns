@@ -168,6 +168,9 @@ EventObserver.prototype = {
     this.observers.forEach(function(item) {
       item.call();
     })
+    if (this.observers.length === 0) {
+      console.log('You are not subscribed to any time intervals currently.');
+    }
   }
 };
 
