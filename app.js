@@ -162,7 +162,7 @@ EventObserver.prototype = {
         return item;
       }
     });
-    console.log(`You are now unsubscribred from ${fn.name}.`);
+    console.log(`You are now unsubscribed from ${fn.name}.`);
   },
   fire: function() {
     this.observers.forEach(function(item) {
